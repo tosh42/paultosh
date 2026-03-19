@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paul Tosh — Theatrical Piano Crooner & Looping Artist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink: #1a1410;
+  --cream: #f5f0e8;
+  --parchment: #ede6d6;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --rust: #8b3a2a;
+  --warm-grey: #6b6157;
+  --border: rgba(201,168,76,0.25);
+  --shadow: rgba(26,20,16,0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 3rem;
+  background: rgba(245,240,232,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: padding 0.3s ease;
+}
+
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-logo span {
+  color: var(--gold);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--warm-grey);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+.nav-book {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream) !important;
+  background: var(--ink);
+  padding: 0.55rem 1.3rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-book:hover { background: var(--gold); color: var(--ink) !important; }
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+  transition: all 0.3s;
+}
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 8rem 2rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-rule-top {
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--gold));
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.8rem;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 1.2rem;
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+
+.hero-name em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+.hero-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--warm-grey);
+  max-width: 560px;
+  margin: 0 auto 0.8rem;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-descriptor {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm-grey);
+  margin-bottom: 2.5rem;
+  animation: fadeUp 0.8s 0.25s ease both;
+}
+
+.hero-pull-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  font-style: italic;
+  color: var(--warm-grey);
+  max-width: 500px;
+  margin: 0 auto 2.5rem;
+  padding: 1.2rem 2rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.hero-pull-quote cite {
+  display: block;
+  font-style: normal;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 0.5rem;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+
+.btn-primary {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--ink);
+  padding: 1rem 2.5rem;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  transition: all 0.25s;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--ink);
+}
+
+.btn-outline {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  padding: 1rem 2.5rem;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  transition: all 0.25s;
+  display: inline-block;
+}
+
+.btn-outline:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm-grey);
+  animation: fadeUp 1s 0.8s ease both;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+/* ── SECTION ARCHITECTURE ── */
+section {
+  padding: 6rem 2rem;
+}
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+/* ── SHOWS ── */
+#shows {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 7rem 2rem;
+}
+
+#shows .section-label { color: var(--gold-light); }
+#shows .section-label::after { background: var(--gold-light); }
+#shows .section-title { color: var(--cream); }
+
+.shows-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 3rem;
+}
+
+.show-card {
+  background: rgba(255,255,255,0.04);
+  padding: 3rem;
+  border: 1px solid rgba(201,168,76,0.15);
+  position: relative;
+  transition: background 0.3s;
+}
+
+.show-card:hover { background: rgba(201,168,76,0.07); }
+
+.show-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  font-weight: 300;
+  color: rgba(201,168,76,0.15);
+  line-height: 1;
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+}
+
+.show-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 1rem;
+}
+
+.show-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--cream);
+  margin-bottom: 1rem;
+}
+
+.show-title em { font-style: italic; color: var(--gold-light); }
+
+.show-desc {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: rgba(245,240,232,0.7);
+  margin-bottom: 1.5rem;
+}
+
+.show-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: rgba(245,240,232,0.6);
+  padding-left: 1rem;
+  border-left: 2px solid var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.show-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: gap 0.2s;
+}
+
+.show-link:hover { gap: 0.9rem; }
+.show-link::after { content: '→'; }
+
+.shows-note {
+  margin-top: 2px;
+  padding: 2rem 3rem;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.15);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(245,240,232,0.65);
+  text-align: center;
+}
+
+/* ── WHO BOOKS YOU ── */
+#venues {
+  background: var(--parchment);
+}
+
+.venues-intro {
+  max-width: 640px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--warm-grey);
+  margin-bottom: 3rem;
+}
+
+.venues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.venue-item {
+  background: var(--parchment);
+  padding: 1.4rem 1.6rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.venue-item:hover {
+  background: var(--ink);
+  color: var(--gold-light);
+}
+
+.venue-item::before {
+  content: '·';
+  color: var(--gold);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* ── PRACTICAL ── */
+#practical {
+  background: var(--cream);
+}
+
+.practical-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.practical-card {
+  padding: 2rem;
+  border: 1px solid var(--border);
+  background: var(--parchment);
+}
+
+.practical-card-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+
+.practical-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+}
+
+.practical-card p {
+  font-size: 0.88rem;
+  color: var(--warm-grey);
+  line-height: 1.7;
+}
+
+/* ── TESTIMONIALS ── */
+#testimonials {
+  background: var(--ink);
+  color: var(--cream);
+  overflow: hidden;
+}
+
+#testimonials .section-title { color: var(--cream); }
+#testimonials .section-label { color: var(--gold-light); }
+#testimonials .section-label::after { background: var(--gold-light); }
+
+.testimonials-marquee-wrapper {
+  margin-top: 3rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.testimonials-marquee-wrapper::before,
+.testimonials-marquee-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 100px;
+  z-index: 2;
+}
+.testimonials-marquee-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--ink), transparent);
+}
+.testimonials-marquee-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--ink), transparent);
+}
+
+.testimonials-track {
+  display: flex;
+  gap: 1.5rem;
+  animation: marquee 50s linear infinite;
+  width: max-content;
+}
+
+.testimonials-track:hover { animation-play-state: paused; }
+
+.t-card {
+  flex-shrink: 0;
+  width: 340px;
+  padding: 2rem 2.2rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.15);
+}
+
+.t-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.65;
+  color: rgba(245,240,232,0.85);
+  margin-bottom: 1rem;
+}
+
+.t-source {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.testimonials-featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.t-featured-card {
+  padding: 2.5rem;
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.2);
+}
+
+.t-featured-card .t-text {
+  font-size: 1.15rem;
+}
+
+/* ── VIDEO ── */
+#video {
+  background: var(--parchment);
+}
+
+.video-intro {
+  max-width: 600px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--warm-grey);
+  line-height: 1.65;
+  margin-bottom: 2.5rem;
+}
+
+.video-main {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  background: var(--ink);
+  margin-bottom: 2rem;
+}
+
+.video-main iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.8rem;
+}
+
+.video-thumb {
+  position: relative;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--ink);
+}
+
+.video-thumb img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.video-thumb:hover img { opacity: 1; transform: scale(1.04); }
+
+.video-thumb-label {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.6rem;
+  right: 0.6rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--cream);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  z-index: 2;
+}
+
+.video-play-icon {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 36px; height: 36px;
+  background: rgba(245,240,232,0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.video-thumb:hover .video-play-icon {
+  transform: translate(-50%,-50%) scale(1.12);
+  background: var(--gold);
+}
+
+.video-play-icon svg {
+  width: 12px; height: 12px;
+  fill: var(--ink);
+  margin-left: 2px;
+}
+
+/* ── ABOUT ── */
+#about {
+  background: var(--cream);
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.about-sidebar {
+  position: sticky;
+  top: 7rem;
+}
+
+.about-name-display {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  font-weight: 300;
+  line-height: 0.9;
+  color: rgba(26,20,16,0.08);
+  margin-bottom: -1.5rem;
+  user-select: none;
+}
+
+.about-credits {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.about-credit {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--warm-grey);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.8rem;
+}
+
+.about-credit strong {
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.about-body p {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--ink);
+  margin-bottom: 1.2rem;
+}
+
+.about-body p:first-child {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--warm-grey);
+}
+
+.about-pull {
+  margin: 2rem 0;
+  padding: 1.5rem 2rem;
+  background: var(--parchment);
+  border-left: 3px solid var(--gold);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--warm-grey);
+  line-height: 1.6;
+}
+
+.about-pull cite {
+  display: block;
+  font-style: normal;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 0.6rem;
+}
+
+/* ── BOOK ── */
+#book {
+  background: var(--ink);
+  color: var(--cream);
+  text-align: center;
+  padding: 8rem 2rem;
+}
+
+#book .section-label { color: var(--gold-light); justify-content: center; }
+#book .section-label::after { display: none; }
+#book .section-title { color: var(--cream); text-align: center; margin-bottom: 0.8rem; }
+
+.book-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: rgba(245,240,232,0.6);
+  max-width: 480px;
+  margin: 0 auto 3rem;
+}
+
+.book-details {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.book-detail {
+  text-align: center;
+}
+
+.book-detail-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+
+.book-detail-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: rgba(245,240,232,0.8);
+}
+
+.book-email {
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.1em;
+  color: var(--gold-light);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 2.5rem;
+  transition: color 0.2s;
+}
+
+.book-email:hover { color: var(--cream); }
+
+.book-social {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+
+.social-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.social-link:hover { color: var(--gold-light); }
+
+/* ── FOOTER ── */
+footer {
+  background: #110e0a;
+  color: rgba(245,240,232,0.35);
+  text-align: center;
+  padding: 2rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+footer a { color: var(--gold); text-decoration: none; }
+
+/* ── DIVIDERS ── */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.ornament::before, .ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.ornament-glyph {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  line-height: 1;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.15); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: var(--cream);
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    gap: 1.2rem;
+    align-items: flex-start;
+  }
+  .nav-hamburger { display: flex; }
+  .shows-grid { grid-template-columns: 1fr; }
+  .practical-grid { grid-template-columns: 1fr 1fr; }
+  .testimonials-featured { grid-template-columns: 1fr; }
+  .about-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .about-sidebar { position: static; }
+  .book-details { gap: 2rem; }
+}
+
+@media (max-width: 600px) {
+  section { padding: 4rem 1.2rem; }
+  .practical-grid { grid-template-columns: 1fr; }
+  nav { padding: 1rem 1.2rem; }
+  .hero-rule-top { display: none; }
+  .hero-ctas { flex-direction: column; align-items: center; }
+  .shows-note { padding: 1.5rem; }
+  #looping .loop-cards { grid-template-columns: 1fr !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP CTA BAR -->
+<div style="background:rgba(26,20,16,.97);border-bottom:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;gap:2rem;padding:.8rem 2rem;flex-wrap:wrap;position:sticky;top:0;z-index:200;">
+  <p style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.45);margin:0;">Theatrical piano · Available nationwide · bookings@tosh42.com</p>
+  <a href="mailto:bookings@tosh42.com" style="display:inline-block;background:#c9a84c;color:#1a1410;font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:.55em 1.6em;white-space:nowrap;">◆ Book Now</a>
+</div>
+
+<!-- ── NAVIGATION ── -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Paul <span>Tosh</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#shows">Shows</a></li>
+    <li><a href="#venues">Venues</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#video">Video</a></li>
+    <li><a href="#looping">Looping</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="mailto:bookings@tosh42.com" class="nav-book">Book a Show</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-rule-top"></div>
+
+  <div>
+    <p class="hero-eyebrow">Scottish Crooner · Pianist · Looping Artist · Songwriter</p>
+
+    <h1 class="hero-name">Paul<br><em>Tosh</em></h1>
+
+    <p class="hero-tagline">Where iconic songs become living theatre</p>
+
+    <p class="hero-descriptor">Now booking 2026 / 27 across the U.S.</p>
+
+    <blockquote class="hero-pull-quote">
+      "I think I've listened to that song a hundred times —<br>but that might be the first time I've actually heard it."
+      <cite>Audience member · video testimonial</cite>
+    </blockquote>
+
+    <div class="hero-ctas">
+      <a href="mailto:bookings@tosh42.com" class="btn-primary">Book a Show</a>
+      <a href="#shows" class="btn-outline">See the Shows</a>
+    </div>
+
+    <div style="margin-top:3rem;max-width:700px;margin-left:auto;margin-right:auto;border:1px solid rgba(201,168,76,0.25);overflow:hidden;box-shadow:0 12px 60px rgba(0,0,0,0.15);">
+      <iframe style="display:block;width:100%;aspect-ratio:16/9;border:0;"
+        src="https://www.youtube.com/embed/yR9I0Bv3FKw"
+        title="Paul Tosh — The Song Is The Play"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ── THE SHOWS ── -->
+<section id="shows">
+  <div class="section-inner">
+    <p class="section-label">Two Distinct Shows</p>
+    <h2 class="section-title">The <em>repertoire</em></h2>
+
+    <div class="shows-grid">
+
+      <!-- SHOW 1: THE SONG IS THE PLAY -->
+      <div class="show-card">
+        <div class="show-number">I</div>
+        <p class="show-tag">Concert · Performance Art</p>
+        <h3 class="show-title">🎭 The Song<br><em>Is The Play</em></h3>
+        <p class="show-desc">
+          Well-known songs performed as theatrical prose, then brought to life with live looping piano.
+          Billy Joel, The Beatles, Bob Dylan, Neil Diamond, Sinatra — each one acted out like a scene from a play,
+          then sung with layered harmonies and rhythms built live in real time.
+          Think the Boston Pops meets solo theatre: music reimagined with storytelling.
+        </p>
+        <p class="show-desc">
+          Also incorporating <a href="./backstage.html" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Backstage With The Tribe</a> for Jewish audiences — weaving the prophetic
+          family histories and hidden roots of the songwriters who shaped generations.
+        </p>
+        <blockquote class="show-quote">
+          "I can't believe the level of artistry you're bringing to the people in these residential homes. I bet they'd never seen anything like it before."
+          <br>— Joe Tepperman, Author &amp; theater writer
+        </blockquote>
+        <a href="#video" class="show-link">Watch the show</a>
+      </div>
+
+      <!-- SHOW 2: PAPER GUN -->
+      <div class="show-card">
+        <div class="show-number">II</div>
+        <p class="show-tag">Operetta · Original Work</p>
+        <h3 class="show-title">🎭 Paper Gun<br><em>The Operetta</em></h3>
+        <p class="show-desc">
+          An original one-piano-man operetta told in monologue and melody. Sharp, poetic, unflinching.
+          Halfway between a musical and a play, <em>Paper Gun</em> explores the death of the conscience buried in the heart —
+          the moment when seeing beyond context is no longer enough, and something must be done.
+        </p>
+        <p class="show-desc">
+          25 original songs across 3 acts. Intimate cabaret format.
+          Commissioned for private home concerts, arts venues, and residencies.
+          Also available via the dedicated site: <a href="http://www.tosh42.com" style="color:var(--gold-light); text-decoration:none;">tosh42.com</a>
+        </p>
+        <blockquote class="show-quote">
+          "Last night made me feel like pre-WWII era of the arts in society. Loved it."
+          <br>— Libby Fox, Hostess, Charleston home premiere
+        </blockquote>
+        <a href="http://www.tosh42.com" class="show-link">Full operetta site</a>
+      </div>
+    </div>
+
+    <div class="shows-note">
+      Available as two separate evenings, or combined in a single extended programme. Happy to discuss the right format for your community.
+    </div>
+
+    <div style="margin-top:3rem;text-align:center;">
+      <p style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:1.2rem;">Programme Poster</p>
+      <img src="./Combo_show.jpg"
+           alt="Paul Tosh — The Song Is The Play featuring Paper Gun — Programme Poster"
+           style="max-width:480px;width:100%;box-shadow:0 20px 80px rgba(0,0,0,0.25);border:1px solid rgba(201,168,76,0.2);">
+    </div>
+  </div>
+</section>
+
+<!-- ── WHO BOOKS PAUL ── -->
+<section id="venues">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">Who Books Paul</p>
+      <h2 class="section-title">Venues &amp; <em>communities</em></h2>
+      <p class="venues-intro">
+        A decade performing up and down the East Coast. Self-sufficient — Paul brings a full technical setup.
+        No piano at your venue? He has a looping piano and keyboard rig. Available any time except sundown Friday to sundown Saturday.
+      </p>
+    </div>
+
+    <div class="venues-grid reveal">
+      <div class="venue-item">55+ Communities</div>
+      <div class="venue-item">Synagogues / Shuls</div>
+      <div class="venue-item">JCCs</div>
+      <div class="venue-item">Pesach Programs</div>
+      <div class="venue-item">Jewish Community Events</div>
+      <div class="venue-item">Private Home Concerts</div>
+      <div class="venue-item">Country &amp; Yacht Clubs</div>
+      <div class="venue-item">Supper Clubs</div>
+      <div class="venue-item">Theatres &amp; Recital Spaces</div>
+      <div class="venue-item">Fund Raisers</div>
+      <div class="venue-item">Retreats &amp; Health Farms</div>
+      <div class="venue-item">Interfaith Gatherings</div>
+      <div class="venue-item">Jazz &amp; Listening Rooms</div>
+      <div class="venue-item">Galas &amp; Events</div>
+      <div class="venue-item">Piano Shop Clinics</div>
+      <div class="venue-item">Universities</div>
+      <div class="venue-item">Senior Living</div>
+      <div class="venue-item">Assisted Living</div>
+    </div>
+
+    <div class="practical-grid reveal" style="margin-top:3rem;">
+      <div class="practical-card">
+        <p class="practical-card-label">Technical</p>
+        <p class="practical-card-title">Fully Self-Sufficient</p>
+        <p>Paul arrives with a complete technical line-up. Live looping system with microphones inside the acoustic grand piano — the same technique Ed Sheeran uses in concert, adapted for the intimacy of solo performance. If your venue has no piano, a full keyboard and looping rig is available.</p>
+      </div>
+      <div class="practical-card">
+        <p class="practical-card-label">Availability</p>
+        <p class="practical-card-title">Currently Booking 2026–27</p>
+        <p>Available any time except sundown Friday to sundown Saturday. Winter Saturday performances from 7:30–8pm onwards (to allow travel time plus one hour setup). Touring the U.S. in the Phoenix CyberPhoenix pop-up camper — genuinely available coast to coast.</p>
+      </div>
+      <div class="practical-card">
+        <p class="practical-card-label">Repertoire</p>
+        <p class="practical-card-title">Flexible Programme</p>
+        <p>Happy to work with you on the ratio of classics to originals, or leave it entirely to Paul to read the room. He specialises in live improvisation and audience connection — the programme adapts to the crowd, always. A full song menu is available on request.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section id="testimonials">
+  <div class="section-inner">
+    <p class="section-label">What People Say</p>
+    <h2 class="section-title">In their own <em>words</em></h2>
+  </div>
+
+  <!-- MARQUEE ROW -->
+  <div class="testimonials-marquee-wrapper" style="margin-top:3rem;">
+    <div class="testimonials-track">
+      <!-- Set 1 -->
+      <div class="t-card">
+        <p class="t-text">"You don't know this but nobody leaves when you play. With the other entertainers people tiptoe out — with you they tiptoe in."</p>
+        <p class="t-source">Phyllis Baumrind · Resident, The Bristal Englewood, NY</p>
+      </div>
+      <div class="t-card">
+        <p class="t-text">"Bar sales are way up whenever Paul plays. A quality style. Please do not hesitate to contact me for a reference."</p>
+        <p class="t-source">Andrew Hollett · GM, Corus Hyde Park</p>
+      </div>
+      <div class="t-card">
+        <p class="t-text">"It's Beatles, U2, Bob Dylan, Billy Joel, jazz — the world would welcome something like this now with open arms. The songs are timeless. It's an album like Sgt. Pepper."</p>
+        <p class="t-source">Orna Wellman · Drama &amp; English Teacher, Canada</p>
+      </div>
+      <div class="t-card">
+        <p class="t-text">"A poetic call to presence — reminding us that the pursuit itself is the purpose, and that love is the foundation of it all. He really knows how to incorporate an audience."</p>
+        <p class="t-source">Amy Kirshtein · Private home concert</p>
+      </div>
+      <div class="t-card">
+        <p class="t-text">"I like it how you tell the history of the songwriters. If they could give you a review from last night, they'd have given you all 10s."</p>
+        <p class="t-source">Stanley Baker · President, BSBI Synagogue, Charleston SC</p>
+      </div>
+      <div class="t-card">
+        <p class="t-text">"Really good solid organic original material — it has to be experienced live. Not simple in structure nor in emotional content."</p>
+        <p class="t-source">Miguel Cavazos · Session Drummer, LA</p>
+      </div>
+      <div class="t-card">
+        <p class="t-text">"When you go into the spoken word style it sounds a little bit like Bob Dylan and David Bowie combined."</p>
+        <p class="t-source">Sound Engineer · Fox Recital Room, Charleston</p>
+      </div>
+      <div class="t-card">
+        <p class="t-text">"Paul has been performing at our assisted living community for two years, almost monthly. Interactive, exciting — he's been known to learn a song for our residents."</p>
+        <p class="t-source">Courtney Corrosi · Activities Director, Brightview Senior Living, Maryland</p>
+      </div>
+      <!-- Duplicate set for seamless loop -->
+      <div class="t-card">
+        <p class="t-text">"You don't know this but nobody leaves when you play. With the other entertainers people tiptoe out — with you they tiptoe in."</p>
+        <p class="t-source">Phyllis Baumrind · Resident, The Bristal Englewood, NY</p>
+      </div>
+      <div class="t-card">
+        <p class="t-text">"Bar sales are way up whenever Paul plays. A quality style. Please do not hesitate to contact me for a reference."</p>
+        <p class="t-source">Andrew Hollett · GM, Corus Hyde Park</p>
+      </div>
+      <div class="t-card">
+        <p class="t-text">"It's Beatles, U2, Bob Dylan, Billy Joel, jazz — the world would welcome something like this now with open arms. The songs are timeless. It's an album like Sgt. Pepper."</p>
+        <p class="t-source">Orna Wellman · Drama &amp; English Teacher, Canada</p>
+      </div>
+      <div class="t-card">
+        <p class="t-text">"A poetic call to presence — reminding us that the pursuit itself is the purpose, and that love is the foundation of it all."</p>
+        <p class="t-source">Amy Kirshtein · Private home concert</p>
+      </div>
+      <div class="t-card">
+        <p class="t-text">"I like it how you tell the history of the songwriters. If they could give you a review from last night, they'd have given you all 10s."</p>
+        <p class="t-source">Stanley Baker · President, BSBI Synagogue, Charleston SC</p>
+      </div>
+      <div class="t-card">
+        <p class="t-text">"Really good solid organic original material — it has to be experienced live."</p>
+        <p class="t-source">Miguel Cavazos · Session Drummer, LA</p>
+      </div>
+      <div class="t-card">
+        <p class="t-text">"When you go into the spoken word style it sounds a little bit like Bob Dylan and David Bowie combined."</p>
+        <p class="t-source">Sound Engineer · Fox Recital Room, Charleston</p>
+      </div>
+      <div class="t-card">
+        <p class="t-text">"Paul has been performing at our assisted living community for two years, almost monthly. Interactive, exciting."</p>
+        <p class="t-source">Courtney Corrosi · Activities Director, Brightview Senior Living, Maryland</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured testimonials -->
+  <div class="section-inner">
+    <div class="testimonials-featured reveal" style="margin-top:3rem;">
+      <div class="t-featured-card">
+        <p class="t-text">"The very embodiment of the term Crooner. Knows his way round the ivories better than most, with an unbeatable repertoire of Classics and originals to keep you entertained."</p>
+        <p class="t-source">Alex Clare · Island Records Artist</p>
+      </div>
+      <div class="t-featured-card">
+        <p class="t-text">"Check this guy out — it's a kiddush Hashem."</p>
+        <p class="t-source" style="margin-bottom:1rem;">Ben Shapiro · The Daily Wire</p>
+        <p class="t-text">"He speaks in a distinctive Scottish accent. With a friendly, bubbly personality that lights up the room and makes everyone feel welcome."</p>
+        <p class="t-source">Baltimore Jewish Times</p>
+      </div>
+      <div class="t-featured-card">
+        <p class="t-text">"I especially like the substantive intellectual meaning you weave into your music. You remind me of the inspiring Shlomo Carlebach."</p>
+        <p class="t-source">Rabbi Daniel Lapin · <a href="http://www.RabbiDanielLapin.com" style="color:var(--gold-light);text-decoration:none;">RabbiDanielLapin.com</a></p>
+      </div>
+      <div class="t-featured-card">
+        <p class="t-text">"Wow — this is as different a performance as anything I've seen in the Listening Room Network. Really more performance art than musical performance. His piano playing is just exceptional."</p>
+        <p class="t-source">Listening Room Network · Audition Review, Aug 2025</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VIDEO ── -->
+<section id="video">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">Watch</p>
+      <h2 class="section-title">See it <em>live</em></h2>
+      <p class="video-intro">
+        The videos do the explaining. Watch audience reactions, full performances, and originals.
+      </p>
+    </div>
+
+    <!-- Playlist embed -->
+    <div class="video-main reveal">
+      <iframe
+        src="https://www.youtube.com/embed/videoseries?list=PL3IO7naSYa2xVowbBuXqud0C4opxj-Oi-"
+        title="Paul Tosh — Full Playlist"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;" class="reveal">
+      <a href="https://www.youtube.com/@paultoshner" target="_blank" class="btn-outline">Full YouTube Channel →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── LIVE LOOPING ── -->
+<section id="looping" style="background:var(--ink);color:var(--cream);padding:5rem 2rem;">
+  <div class="section-inner">
+    <p class="section-label" style="color:var(--gold-light);">The Technique</p>
+    <h2 class="section-title" style="color:var(--cream);">Live <em>looping</em></h2>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:300;color:rgba(245,240,232,0.65);max-width:620px;line-height:1.65;margin-bottom:2.5rem;">
+      One man. One piano. A full orchestral sound — built live, in real time, in front of you. No backing tracks. No band. Every layer you hear is created and looped on the spot.
+    </p>
+    <div style="border:1px solid rgba(201,168,76,0.25);background:#000;overflow:hidden;margin-bottom:1.5rem;">
+      <iframe
+        style="display:block;width:100%;aspect-ratio:16/9;border:0;"
+        src="https://www.youtube.com/embed/-okEF0Mir1E"
+        title="Paul Tosh — Live Looping"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="loop-cards" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-top:2rem;">
+      <div style="border:1px solid rgba(201,168,76,0.15);padding:1.5rem;background:rgba(255,255,255,0.02);">
+        <p style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">The Method</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--cream);margin-bottom:0.5rem;">Ed Sheeran's Technique</p>
+        <p style="font-size:0.85rem;color:rgba(245,240,232,0.55);line-height:1.7;">Microphones placed inside the acoustic grand piano, capturing individual strings — the same live looping technique Ed Sheeran uses at stadium scale, adapted for the intimacy of solo performance.</p>
+      </div>
+      <div style="border:1px solid rgba(201,168,76,0.15);padding:1.5rem;background:rgba(255,255,255,0.02);">
+        <p style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">The Result</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--cream);margin-bottom:0.5rem;">No Band Required</p>
+        <p style="font-size:0.85rem;color:rgba(245,240,232,0.55);line-height:1.7;">Bass lines, harmony vocals, rhythm, and melody — all layered live. Every performance is unrepeatable. The audience watches the music being built from nothing, which is itself part of the theatre.</p>
+      </div>
+      <div style="border:1px solid rgba(201,168,76,0.15);padding:1.5rem;background:rgba(255,255,255,0.02);">
+        <p style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">The Setup</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--cream);margin-bottom:0.5rem;">Fully Self-Sufficient</p>
+        <p style="font-size:0.85rem;color:rgba(245,240,232,0.55);line-height:1.7;">Paul arrives with a complete technical rig. No piano at your venue? A full keyboard and looping setup travels with him. No sound engineer needed. He sets up, performs, and leaves the room intact.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-layout">
+      <div class="about-sidebar reveal">
+        <div class="about-name-display">Paul<br>Tosh</div>
+        <div class="about-credits">
+          <div class="about-credit"><strong>Originally from</strong> Glasgow, Scotland</div>
+          <div class="about-credit"><strong>Style</strong> Theatrical piano crooner, looping artist, songwriter</div>
+          <div class="about-credit"><strong>Experience</strong> Four years, four nights/week — Hyde Park &amp; Regents Park hotels, London</div>
+          <div class="about-credit"><strong>U.S.</strong> Senior living, shuls, country clubs, private homes — East Coast to nationwide</div>
+          <div class="about-credit"><strong>Touring</strong> Phoenix CyberPhoenix pop-up camper</div>
+          <div class="about-credit"><strong>Contact</strong> <a href="mailto:bookings@tosh42.com" style="color:var(--gold);text-decoration:none;">bookings@tosh42.com</a></div>
+        </div>
+      </div>
+
+      <div class="about-body reveal">
+        <p>
+          Paul Tosh is a Scottish-born, USA-touring singer, pianist, and songwriter renowned for emotive performances
+          and an eclectic musical style that blends jazz, classical, pop, folk, and traditional music.
+        </p>
+        <p>
+          He built his repertoire and his performance philosophy in the hotels of Hyde Park and Regents Park, London —
+          four hours a night, four nights a week, for four years. That's where he learned to read a room,
+          to hold an audience, and to discover that the best thing you can do with a familiar song
+          is reveal what it was always trying to say.
+        </p>
+
+        <blockquote class="about-pull">
+          "You are an artist in your own right — I just hear Paul Tosh."
+          <cite>Miss Sylvia · Brightview Wellspring (video testimonial)</cite>
+        </blockquote>
+
+        <p>
+          Touring the U.S. in a custom CyberPhoenix pop-up camper,
+          Paul brings these shows to senior living communities, synagogues, private homes, country clubs,
+          and arts venues up and down the East Coast — and increasingly coast to coast.
+        </p>
+        <p>
+          His live looping system — microphones placed inside the acoustic grand piano, the same technique
+          Ed Sheeran uses at scale — lets him build full orchestral textures as a solo performer.
+          No band required. No backing tracks. Every performance is live, layered in real time, and unrepeatable.
+        </p>
+
+        <blockquote class="about-pull">
+          "Entertainment for seniors is a noble mission, for which you are perfectly suited. They are deserving of the same quality of entertainment that the rest of us can access. Long may you continue."
+          <cite>Kate Tough · roots of the great songwriters
+          into the performance of their music. Available standalone or incorporated into either main show.
+        </p>
+
+        <div style="margin-top:2rem;">
+          <a href="mailto:bookings@tosh42.com" class="btn-primary">Book a Show</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BOOK ── -->
+<section id="book">
+  <p class="section-label">Get in touch</p>
+  <h2 class="section-title">Book <em>a show</em></h2>
+  <p class="book-subtitle">
+    For availability, pricing, and format discussion — please reach out directly.
+  </p>
+
+  <div class="book-details">
+    <div class="book-detail">
+      <p class="book-detail-label">Booking</p>
+      <p class="book-detail-value">bookings@tosh42.com</p>
+    </div>
+    <div class="book-detail">
+      <p class="book-detail-label">Availability</p>
+      <p class="book-detail-value">2026 / 27 — Nationwide</p>
+    </div>
+    <div class="book-detail">
+      <p class="book-detail-label">Operetta site</p>
+      <p class="book-detail-value"><a href="./papergun.html" style="color:var(--gold-light);text-decoration:none;">tosh42.com/papergun</a></p>
+    </div>
+  </div>
+
+  <a href="mailto:bookings@tosh42.com" class="btn-primary" style="font-size:0.9rem;padding:1.2rem 3rem;letter-spacing:0.15em;">
+    Email Paul
+  </a>
+
+  <div class="book-social">
+    <a href="https://www.youtube.com/@paultoshner" target="_blank" class="social-link">YouTube</a>
+    <a href="https://www.instagram.com/paultoshner/" target="_blank" class="social-link">Instagram</a>
+    <a href="https://www.tiktok.com/@paultoshner" target="_blank" class="social-link">TikTok</a>
+    <a href="https://www.linkedin.com/in/paultoshner/" target="_blank" class="social-link">LinkedIn</a>
+    <a href="https://x.com/paultoshner" target="_blank" class="social-link">X / Twitter</a>
+    <a href="https://gofund.me/690bc5bca" target="_blank" class="social-link">GoFundMe</a>
+    <a href="https://www.amazon.com/gp/product/1736634569/" target="_blank" class="social-link">Book on Amazon</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2026 Paul Tosh &nbsp;·&nbsp; <a href="mailto:bookings@tosh42.com">bookings@tosh42.com</a> &nbsp;·&nbsp; <a href="./papergun.html">Paper Gun Operetta</a></p>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.style.padding = window.scrollY > 50 ? '0.8rem 3rem' : '1.2rem 3rem';
+});
+
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+
+// Close nav on link click
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+</script><!-- BOTTOM CTA BAR -->
+<div style="background:rgba(26,20,16,.97);border-top:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;gap:2rem;padding:1.2rem 2rem;flex-wrap:wrap;">
+  <p style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.35);margin:0;">Paul responds personally to every enquiry</p>
+  <a href="mailto:bookings@tosh42.com" style="display:inline-block;background:#c9a84c;color:#1a1410;font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:.55em 1.6em;">◆ Book Now</a>
+</div>
+
+</body>
+</html>

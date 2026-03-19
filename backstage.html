@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Backstage With The Tribe — Paul Tosh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink: #1a1410;
+  --cream: #f5f0e8;
+  --parchment: #ede6d6;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --rust: #8b3a2a;
+  --warm-grey: #6b6157;
+  --border: rgba(201,168,76,0.25);
+  --shadow: rgba(26,20,16,0.15);
+  --deep: #12100e;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2.5rem;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+}
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--cream); opacity: 0.55; font-size: 0.65rem; letter-spacing: 0.15em; margin-left: 0.5rem; }
+.nav-book {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--ink);
+  padding: 0.55em 1.5em;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-book:hover { background: var(--gold-light); }
+
+/* ── HERO ── */
+#hero {
+  background: var(--deep);
+  color: var(--cream);
+  padding: 6rem 2rem 5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.12), transparent 65%);
+  pointer-events: none;
+}
+.bsdi {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-bottom: 2rem;
+  display: block;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+#hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--cream);
+  margin-bottom: 0.4em;
+}
+#hero h1 em {
+  font-style: italic;
+  color: var(--gold-light);
+  display: block;
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-style: italic;
+  color: rgba(245,240,232,0.65);
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.55;
+}
+.hero-rule {
+  width: 60px; height: 1px;
+  background: var(--gold);
+  margin: 0 auto 2.5rem;
+  opacity: 0.5;
+}
+.hero-ctas {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--ink);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1em 2.5em;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--gold-light); }
+.btn-outline {
+  border: 1px solid rgba(201,168,76,0.5);
+  color: var(--gold-light);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1em 2.5em;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline:hover { border-color: var(--gold-light); color: var(--cream); }
+
+/* ── SECTIONS ── */
+section { padding: 5rem 2rem; }
+.section-inner { max-width: 860px; margin: 0 auto; }
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.section-label::after {
+  content: ''; flex: 1; max-width: 50px;
+  height: 1px; background: var(--gold);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.section-title em { font-style: italic; color: var(--rust); }
+
+/* ── WHAT IS IT ── */
+#what { background: var(--cream); }
+.what-intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--warm-grey);
+  line-height: 1.65;
+  max-width: 700px;
+  margin-bottom: 2rem;
+  border-left: 2px solid var(--gold);
+  padding-left: 1.5rem;
+}
+.what-body p {
+  font-size: 0.97rem;
+  color: var(--warm-grey);
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+  max-width: 680px;
+}
+.what-body p strong { color: var(--ink); font-weight: 700; }
+
+/* ── SONGWRITERS LIST ── */
+#songwriters { background: var(--ink); color: var(--cream); }
+#songwriters .section-label { color: var(--gold); }
+#songwriters .section-label::after { background: var(--gold); }
+#songwriters .section-title { color: var(--cream); }
+.writers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1px;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.15);
+  margin-top: 2rem;
+}
+.writer-item {
+  background: var(--deep);
+  padding: 0.9rem 1.2rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: rgba(245,240,232,0.7);
+  display: flex; align-items: center; gap: 0.6rem;
+  transition: background 0.2s, color 0.2s;
+}
+.writer-item:hover { background: rgba(201,168,76,0.1); color: var(--gold-light); }
+.writer-item::before { content: '◆'; color: var(--gold); font-size: 0.4rem; opacity: 0.5; flex-shrink: 0; }
+.writers-note {
+  margin-top: 2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(245,240,232,0.5);
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+/* ── FORMATS ── */
+#formats { background: var(--parchment); }
+.formats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+.format-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+}
+.format-number {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  color: var(--gold);
+  opacity: 0.3;
+  line-height: 1;
+  margin-bottom: 0.8rem;
+}
+.format-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+.format-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.format-title em { font-style: italic; color: var(--rust); }
+.format-desc {
+  font-size: 0.9rem;
+  color: var(--warm-grey);
+  line-height: 1.75;
+  margin-bottom: 0.8rem;
+}
+.format-songs {
+  list-style: none;
+  margin-top: 1rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+.format-songs li {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.67rem;
+  letter-spacing: 0.08em;
+  color: var(--warm-grey);
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  display: flex; align-items: baseline; gap: 0.6rem;
+}
+.format-songs li::before { content: '—'; color: var(--gold); opacity: 0.5; flex-shrink: 0; }
+
+/* ── SAMPLE PROGRAMME ── */
+#programme { background: var(--ink); color: var(--cream); }
+#programme .section-label { color: var(--gold); }
+#programme .section-label::after { background: var(--gold); }
+#programme .section-title { color: var(--cream); }
+.programme-intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: rgba(245,240,232,0.6);
+  max-width: 600px;
+  margin-bottom: 2.5rem;
+}
+.programme-parts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.prog-part {
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.02);
+}
+.prog-part-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.prog-part-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--cream);
+  margin-bottom: 0.75rem;
+}
+.prog-part p {
+  font-size: 0.85rem;
+  color: rgba(245,240,232,0.6);
+  line-height: 1.7;
+}
+.prog-finale {
+  border: 1px solid rgba(201,168,76,0.3);
+  background: rgba(201,168,76,0.05);
+  padding: 2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: rgba(245,240,232,0.8);
+  line-height: 1.7;
+  text-align: center;
+}
+.prog-finale cite {
+  display: block;
+  margin-top: 0.8rem;
+  font-family: 'DM Mono', monospace;
+  font-style: normal;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+/* ── VIDEO ── */
+#video { background: var(--cream); }
+.video-wrap {
+  border: 1px solid var(--border);
+  background: var(--ink);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.video-wrap iframe {
+  display: block; width: 100%;
+  aspect-ratio: 16/9; border: 0;
+}
+.video-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm-grey);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* ── TESTIMONIALS ── */
+#testimonials { background: var(--parchment); }
+.tc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.tc {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  padding: 1.8rem;
+}
+.tc.featured {
+  grid-column: 1 / -1;
+  background: var(--ink);
+  border-color: rgba(201,168,76,0.3);
+}
+.tc blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--ink);
+  margin-bottom: 0.8rem;
+}
+.tc.featured blockquote {
+  font-size: 1.25rem;
+  color: var(--cream);
+}
+.tc cite {
+  font-family: 'DM Mono', monospace;
+  font-style: normal;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  line-height: 1.8;
+}
+.tc cite a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.3); }
+
+/* ── PRACTICAL ── */
+#practical { background: var(--cream); }
+.practical-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.prac-card {
+  border: 1px solid var(--border);
+  padding: 1.8rem;
+  background: var(--parchment);
+}
+.prac-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+.prac-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+.prac-card p {
+  font-size: 0.88rem;
+  color: var(--warm-grey);
+  line-height: 1.75;
+}
+
+/* ── CTA ── */
+#book {
+  background: var(--deep);
+  color: var(--cream);
+  text-align: center;
+  padding: 5rem 2rem;
+}
+#book .section-label { justify-content: center; color: var(--gold); }
+#book .section-label::after { display: none; }
+#book .section-title { color: var(--cream); text-align: center; }
+.book-email {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--gold-light);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201,168,76,0.3);
+  margin: 1.5rem 0 2.5rem;
+  transition: color 0.2s;
+}
+.book-email:hover { color: var(--cream); }
+.book-sub {
+  font-size: 0.88rem;
+  color: rgba(245,240,232,0.5);
+  font-style: italic;
+  max-width: 460px;
+  margin: 0 auto 2rem;
+  line-height: 1.65;
+}
+.back-link {
+  display: block;
+  margin-top: 3rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.3);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--gold); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  text-align: center;
+  padding: 2rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: rgba(245,240,232,0.2);
+  border-top: 1px solid rgba(201,168,76,0.1);
+}
+footer a { color: rgba(201,168,76,0.5); text-decoration: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  nav { padding: 0.9rem 1.2rem; position: relative; top: auto; }
+  .formats-grid { grid-template-columns: 1fr; }
+  .programme-parts { grid-template-columns: 1fr; }
+  .tc-grid { grid-template-columns: 1fr; }
+  .tc.featured { grid-column: 1; }
+  .practical-grid { grid-template-columns: 1fr; }
+  #hero h1 { font-size: clamp(2.2rem, 10vw, 4rem); }
+  .poster-grid { grid-template-columns: 1fr !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP CTA BAR -->
+<div style="background:rgba(18,16,14,.97);border-bottom:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;gap:2rem;padding:.8rem 2rem;flex-wrap:wrap;">
+  <p style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.4);margin:0;">Jewish cultural concert · Shuls · JCCs · Pesach</p>
+  <a href="mailto:bookings@tosh42.com" style="display:inline-block;background:#c9a84c;color:#1a1410;font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:.55em 1.6em;white-space:nowrap;">◆ Book Now</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="./paultosh.html" class="nav-logo">Paul Tosh <span>← Main Site</span></a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <span class="bsdi" style="text-align:right;display:block;padding-right:0.5rem;">BS&quot;D</span>
+  <p class="hero-eyebrow">Paul Tosh · Scottish-born · Baal Teshuva · Pianist & Looping Artist</p>
+  <h1>Backstage With<br><em>The Tribe</em></h1>
+  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,2.2vw,1.3rem);color:rgba(245,240,232,0.5);margin-top:0.5rem;margin-bottom:1.5rem;letter-spacing:0.05em;">(The Jewish Scotsman)</p>
+  <p class="hero-sub">A Jewish cultural concert experience — six decades of the songwriters who shaped the world, performed as living theatre.</p>
+  <div class="hero-rule"></div>
+  <div class="hero-ctas">
+    <a href="mailto:bookings@tosh42.com" class="btn-primary">Book a Show</a>
+    <a href="#what" class="btn-outline">Learn More</a>
+  </div>
+
+  <!-- POSTER removed from hero - appears further down the page -->
+</section>
+
+<!-- WHAT IS IT -->
+<section id="what">
+  <div class="section-inner">
+    <p class="section-label">The Show</p>
+    <h2 class="section-title">Where music meets <em>memory</em></h2>
+    <p class="what-intro">
+      An adaptation of <em>The Song Is The Play</em> — focusing on the Jewish writers of the last six decades, and their immigrant family story.
+    </p>
+    <div class="what-body">
+      <p>
+        <strong>Backstage With The Tribe</strong> is a theatrical concert add-on for synagogues, JCCs, Pesach programs, and Jewish community organizations. It weaves the prophetic family histories and hidden roots of the songwriters who shaped generations — from Gershwin to Amy Winehouse, from Simon &amp; Garfunkel to Barbra Streisand — performed as dramatic scenes, then brought to life with live looping piano.
+      </p>
+      <p style="font-size:0.88rem;font-style:italic;color:var(--warm-grey);border-left:2px solid rgba(201,168,76,0.3);padding-left:1rem;margin-bottom:1.2rem;">
+        The show is also sometimes billed as <strong style="font-style:normal;color:var(--ink);">The Jewish Scotsman</strong> — a title that speaks directly to Paul's singular vantage point as a Scottish-born baal teshuva performing the music of the writers who shaped Jewish-American culture.
+      </p>
+      <p>
+        Paul is not merely a Jewish artist. He is an artist who is Jewish — a baal teshuva of over 20 years, Scottish-born, formed in London, seasoned across the American East Coast. It is precisely this vantage point that allows him to enrich the performance, creating space for universal dialogue while speaking with genuine insider warmth to Jewish audiences of every background: frum, not-so-frum, secular, and interfaith.
+      </p>
+      <p>
+        With deep roots in storytelling and a cultural emphasis on questioning, it's no coincidence he was drawn to the thinking and mindset of the Jewish songwriters. Their ability to blend profound emotion with wit and universal themes speaks to a unique worldview shaped by a history of struggle and creativity — turning hardship into beauty, humor, or hope. This introspective yet outward-looking approach mirrors the learning of Talmud: finding the ultimate in the deep and the abstract.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- THE SONGWRITERS -->
+<section id="songwriters">
+  <div class="section-inner">
+    <p class="section-label">The Repertoire</p>
+    <h2 class="section-title">Six decades of <em>the writers</em></h2>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(245,240,232,0.6);max-width:640px;margin-bottom:0.5rem;line-height:1.65;">
+      Jewish songwriters have had a profound influence on music — shaping jazz, rock, pop, Broadway, and folk, bringing light from another world into the darkest corners.
+    </p>
+    <div class="writers-grid">
+      <div class="writer-item">Billy Joel</div>
+      <div class="writer-item">Bob Dylan</div>
+      <div class="writer-item">Leonard Cohen</div>
+      <div class="writer-item">Barbra Streisand</div>
+      <div class="writer-item">Neil Diamond</div>
+      <div class="writer-item">Carole King</div>
+      <div class="writer-item">Burt Bacharach</div>
+      <div class="writer-item">Simon &amp; Garfunkel</div>
+      <div class="writer-item">Amy Winehouse</div>
+      <div class="writer-item">Bette Midler</div>
+      <div class="writer-item">George Gershwin</div>
+      <div class="writer-item">Irving Berlin</div>
+      <div class="writer-item">Richard Rodgers</div>
+      <div class="writer-item">Barry Manilow</div>
+      <div class="writer-item">Carly Simon</div>
+      <div class="writer-item">Regina Spektor</div>
+      <div class="writer-item">Stephen Sondheim</div>
+      <div class="writer-item">Marc Cohen</div>
+      <div class="writer-item">Mark Ronson</div>
+      <div class="writer-item">Diane Warren</div>
+      <div class="writer-item">Danny Kaye</div>
+      <div class="writer-item">Leiber &amp; Stoller</div>
+      <div class="writer-item">Marvin Hamlisch</div>
+      <div class="writer-item">Hillel Slovak (RHCP)</div>
+      <div class="writer-item">Mel Tormé</div>
+      <div class="writer-item">Sammy Cahn</div>
+      <div class="writer-item">Cy Coleman</div>
+      <div class="writer-item">Alex Clare</div>
+    </div>
+    <p class="writers-note">From the Chilli Peppers to Gershwin · From Amy Winehouse to Barbra Streisand · Including Frank Sinatra's Jewish writers</p>
+  </div>
+</section>
+
+<!-- FORMATS -->
+<section id="formats">
+  <div class="section-inner">
+    <p class="section-label">Formats</p>
+    <h2 class="section-title">The right show for <em>your audience</em></h2>
+    <p style="font-size:0.95rem;color:var(--warm-grey);max-width:600px;margin-bottom:0.5rem;">Available as a standalone evening, or incorporated into <em>The Song Is The Play</em>. Paul is happy to discuss the right format for your community — frum, traditional, liberal, or interfaith.</p>
+
+    <div class="formats-grid">
+
+      <!-- FORMAT 1 -->
+      <div class="format-card">
+        <div class="format-number">I</div>
+        <p class="format-tag">Shuls · JCCs · Home Concerts</p>
+        <h3 class="format-title">Backstage With<br><em>The Tribe</em></h3>
+        <p class="format-desc">
+          The Song Is The Play with a Jewish cultural focus — songs from six decades of Jewish songwriters, performed as theatrical scenes with live looping piano. Includes insights into the songs and brief histories of the artists' lives. Woven throughout with Jewish pride, warmth, and humour.
+        </p>
+        <p class="format-desc">
+          Suitable for general audiences, fundraisers, cultural evenings, and community concerts. Engaging for members of all backgrounds.
+        </p>
+      </div>
+
+      <!-- FORMAT 2 -->
+      <div class="format-card">
+        <div class="format-number">II</div>
+        <p class="format-tag">Pesach Programs · Frum Audiences</p>
+        <h3 class="format-title">Operetta Format<br><em>for Pesach</em></h3>
+        <p class="format-desc">
+          A special adaptation blending cover and original songs that bridge two worlds — the Jewish and the universal — with a twist of wisdom revealed. Includes Divray Torah, Talmudic insights, and original pieces alongside the Jewish songwriters.
+        </p>
+        <ul class="format-songs">
+          <li>Across the Universe (Ain Od Milvado)</li>
+          <li>The Visitors (original)</li>
+          <li>Havanagila — jazz looping version</li>
+          <li>Hakol Yochol</li>
+          <li>Precious Angel — Bob Dylan</li>
+          <li>Forever Young — Bob Dylan</li>
+          <li>Stars — Nina Simone</li>
+          <li>Rainbow (chizuk)</li>
+          <li>G-d Bless (original)</li>
+          <li>+ more mkarev songs</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE PROGRAMME -->
+<section id="programme">
+  <div class="section-inner">
+    <p class="section-label">Sample Programme</p>
+    <h2 class="section-title">A 45–75 minute <em>journey</em></h2>
+    <p class="programme-intro">Structure is flexible and adapts to your audience. This is how a typical evening unfolds.</p>
+
+    <div class="programme-parts">
+      <div class="prog-part">
+        <p class="prog-part-label">Part One</p>
+        <p class="prog-part-title">"The First Song I Ever Loved"</p>
+        <p>Opening number — nostalgic, universal. A short story about the relationship with music, or a road story. <em>"Before I found observance, I found sound. The neshama already knows song."</em></p>
+      </div>
+      <div class="prog-part">
+        <p class="prog-part-label">Part Two</p>
+        <p class="prog-part-title">"Between Night and Morning"</p>
+        <p>Medley of heartfelt, searching pieces. A story about teshuvah — the journey inward that never quite ends.</p>
+      </div>
+      <div class="prog-part">
+        <p class="prog-part-label">Part Three</p>
+        <p class="prog-part-title">"Sparks in the Silence"</p>
+        <p>Instrumental solo or stripped-down vocals. <em>"Judaism doesn't ask me to stop being an artist. It asks me to become a vessel."</em></p>
+      </div>
+      <div class="prog-part">
+        <p class="prog-part-label">Part Four</p>
+        <p class="prog-part-title">"Songs I Brought With Me"</p>
+        <p>Well-loved songs recontextualised with depth — Beatles, Dylan, Carole King, The Eagles. Hebrew piece: Havanagila, Anenu, or Narrow Bridge.</p>
+      </div>
+    </div>
+
+    <div class="prog-finale">
+      "This is all just me bringing my two halves to the same bench. The performer and the soul. The Jewish me and the jazz me. I used to think they were at war — now I know they are the harmony."
+      <cite>Paul Tosh</cite>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section id="video">
+  <div class="section-inner">
+    <p class="section-label">Watch</p>
+    <h2 class="section-title">See it <em>live</em></h2>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--warm-grey);max-width:580px;margin-bottom:2rem;line-height:1.6;">
+      The videos capture the warmth, the humour, and the emotional depth that words cannot fully convey.
+    </p>
+
+    <!-- MAIN BTG VIDEO -->
+    <div class="video-wrap" style="margin-bottom:0;">
+      <iframe
+        src="https://www.youtube.com/embed/O2zNWYsTe8A"
+        title="Backstage With The Tribe — Paul Tosh"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <!-- TIMESTAMPS -->
+    <div style="background:var(--ink);border:1px solid rgba(201,168,76,0.15);border-top:none;padding:1.5rem 2rem;margin-bottom:2.5rem;">
+      <p style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:1rem;">
+        Video Guide &nbsp;·&nbsp;
+        <span style="color:rgba(245,240,232,0.4);letter-spacing:0.1em;">BTG = Bridging The Gap &nbsp;·&nbsp; JP = Jewish Pride</span>
+      </p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.3rem 2rem;">
+        <p style="font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(245,240,232,0.55);line-height:1.9;"><span style="color:var(--gold);opacity:0.7;min-width:3rem;display:inline-block;">00:06</span> BTG — Orthodox in Scotland</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(245,240,232,0.55);line-height:1.9;"><span style="color:var(--gold);opacity:0.7;min-width:3rem;display:inline-block;">00:19</span> BTG — I see you are wearing a yamolka</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(245,240,232,0.55);line-height:1.9;"><span style="color:var(--gold);opacity:0.7;min-width:3rem;display:inline-block;">00:40</span> BTG — Matzliach</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(245,240,232,0.55);line-height:1.9;"><span style="color:var(--gold);opacity:0.7;min-width:3rem;display:inline-block;">01:03</span> BTG — Too long for Moshiach</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(245,240,232,0.55);line-height:1.9;"><span style="color:var(--gold);opacity:0.7;min-width:3rem;display:inline-block;">01:53</span> JP — Challenging Jewish parents</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(245,240,232,0.55);line-height:1.9;"><span style="color:var(--gold);opacity:0.7;min-width:3rem;display:inline-block;">02:16</span> JP — History of the writers</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(245,240,232,0.55);line-height:1.9;"><span style="color:var(--gold);opacity:0.7;min-width:3rem;display:inline-block;">02:48</span> JP — The Jewish writers</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(245,240,232,0.55);line-height:1.9;"><span style="color:var(--gold);opacity:0.7;min-width:3rem;display:inline-block;">08:24</span> JP — Sinatra's Jewish writers</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(245,240,232,0.55);line-height:1.9;"><span style="color:var(--gold);opacity:0.7;min-width:3rem;display:inline-block;">09:21</span> JP — White Christmas</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(245,240,232,0.55);line-height:1.9;"><span style="color:var(--gold);opacity:0.7;min-width:3rem;display:inline-block;">10:17</span> JP — Look deeply into being Jewish</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(245,240,232,0.55);line-height:1.9;"><span style="color:var(--gold);opacity:0.7;min-width:3rem;display:inline-block;">10:30</span> BTG — His world is set up to be so</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(245,240,232,0.55);line-height:1.9;"><span style="color:var(--gold);opacity:0.7;min-width:3rem;display:inline-block;">10:45</span> BTG — Focus &amp; learning Talmud</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(245,240,232,0.55);line-height:1.9;"><span style="color:var(--gold);opacity:0.7;min-width:3rem;display:inline-block;">11:23</span> BTG — Dvar Torah</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(245,240,232,0.55);line-height:1.9;"><span style="color:var(--gold);opacity:0.7;min-width:3rem;display:inline-block;">11:49</span> BTG — Rabbi puppet chizuk</p>
+      </div>
+    </div>
+
+    <!-- FULL PLAYLIST -->
+    <p style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:1rem;">Full Performance Playlist</p>
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/videoseries?list=PL3IO7naSYa2xwaaPsK_VQRad-5NN80uuH"
+        title="Paul Tosh — Backstage With The Tribe Playlist"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <p class="video-label">Jewish content playlist</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-inner">
+    <p class="section-label">What People Say</p>
+    <h2 class="section-title">In their own <em>words</em></h2>
+
+    <div class="tc-grid">
+
+      <div class="tc featured">
+        <blockquote>"Check this guy out, it's a kiddush Hashem."</blockquote>
+        <cite>Ben Shapiro — The Daily Wire</cite>
+      </div>
+
+      <div class="tc featured">
+        <blockquote>"I especially like the substantive intellectual meaning that you weave into your music. You remind me of the inspiring Shlomo Carlebach ע״ש. The interface with the late great Rabbi Sacks is profoundly meaningful."</blockquote>
+        <cite>Rabbi Daniel Lapin — <a href="https://www.RabbiDanielLapin.com" target="_blank">RabbiDanielLapin.com</a></cite>
+      </div>
+
+      <div class="tc">
+        <blockquote>"I like it how you tell the history of the songwriters. If they could have given you a review from last night they'd have given you all 10's."</blockquote>
+        <cite>Stanley Baker — President, BSBI Synagogue, Charleston SC · <a href="mailto:president@bsbisynagogue.org">president@bsbisynagogue.org</a></cite>
+      </div>
+
+      <div class="tc">
+        <blockquote>"Out of 400 million people in America, Pinchas Toshner is the only frum baal teshuva from Scotland, singer songwriter. The only musician who can really relate what's in frumkeit to the non-religious."</blockquote>
+        <cite>Jacob Applebaum — Lakewood</cite>
+      </div>
+
+      <div class="tc">
+        <blockquote>"In the frum world, we don't often talk about the experience of love. Here, love is explored tastefully. The songs are dense but easy to listen to — and that's just from a recording. I imagine there is a special energy listening live."</blockquote>
+        <cite>Daniel Marvin — Master's in Computers and Information Technology, Baltimore</cite>
+      </div>
+
+      <div class="tc">
+        <blockquote>"The world would welcome something like this now with open arms. The songs are timeless."</blockquote>
+        <cite>Orna Wellman — Drama and English teacher, Canada</cite>
+      </div>
+
+      <div class="tc">
+        <blockquote>"Last night made me feel like the pre-WWII era of the arts in society! Loved it."</blockquote>
+        <cite>Libby Fox — Hostess, Charleston home concert</cite>
+      </div>
+
+      <div class="tc">
+        <blockquote>"A poetic call to presence — reminding us that the pursuit itself is the purpose, and that love, more than anything, is the foundation of it all."</blockquote>
+        <cite>Amy Kirshtein — at Libby &amp; Daniel's home concert</cite>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICAL -->
+<section id="practical">
+  <div class="section-inner">
+    <p class="section-label">Practical</p>
+    <h2 class="section-title">Everything you <em>need to know</em></h2>
+    <div class="practical-grid">
+      <div class="prac-card">
+        <p class="prac-label">Self-Sufficient</p>
+        <p class="prac-title">No Piano? No Problem</p>
+        <p>Paul brings a full looping piano and keyboard rig. No accommodation or catering required. He arrives, sets up, performs — clean and professional.</p>
+      </div>
+      <div class="prac-card">
+        <p class="prac-label">Availability</p>
+        <p class="prac-title">Currently Booking 2026–27</p>
+        <p>Available any time except sundown Friday to sundown Saturday. Touring the U.S. coast to coast in a custom CyberPhoenix pop-up camper — genuinely nationwide.</p>
+      </div>
+      <div class="prac-card">
+        <p class="prac-label">Investment</p>
+        <p class="prac-title">Flexible Honorarium</p>
+        <p>$750–$2,500 depending on programme, format, and setup. Happy to discuss what works for your organisation. Fundraiser splits available.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSTER SECTION -->
+<section style="background:var(--parchment);padding:5rem 2rem;text-align:center;">
+  <div class="section-inner" style="text-align:center;">
+    <p class="section-label" style="justify-content:center;">Programme Posters</p>
+    <h2 class="section-title" style="text-align:center;">Share with your <em>community</em></h2>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--warm-grey);max-width:500px;margin:0 auto 2.5rem;line-height:1.65;">Print-ready posters — pass them on to your programme committee, post in your shul, or attach to a booking email.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;max-width:860px;margin:0 auto 2.5rem;align-items:start;">
+
+      <!-- Poster 1 — Backstage With The Tribe -->
+      <div>
+        <p style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Backstage With The Tribe</p>
+        <div style="box-shadow:0 16px 70px rgba(26,20,16,0.2);border:1px solid var(--border);margin-bottom:1rem;">
+          <img src="./backstage-poster.jpg"
+               alt="Backstage With The Tribe — Paul Tosh Programme Poster"
+               style="display:block;width:100%;">
+        </div>
+        <a href="./backstage-poster.jpg" download="Backstage-With-The-Tribe-Paul-Tosh.jpg"
+           style="display:inline-block;background:var(--gold);color:var(--ink);font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;text-decoration:none;padding:0.75em 1.8em;"
+           onmouseover="this.style.background='#e8c97a'" onmouseout="this.style.background='#c9a84c'">
+          ↓ Download
+        </a>
+      </div>
+
+      <!-- Poster 2 — The Jewish Scotsman -->
+      <div>
+        <p style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">The Jewish Scotsman</p>
+        <div style="box-shadow:0 16px 70px rgba(26,20,16,0.2);border:1px solid var(--border);margin-bottom:1rem;">
+          <img src="./Poster_J_Scot.jpg"
+               alt="The Jewish Scotsman — Paul Tosh Programme Poster"
+               style="display:block;width:100%;">
+        </div>
+        <a href="./Poster_J_Scot.jpg" download="The-Jewish-Scotsman-Paul-Tosh.jpg"
+           style="display:inline-block;background:var(--gold);color:var(--ink);font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;text-decoration:none;padding:0.75em 1.8em;"
+           onmouseover="this.style.background='#e8c97a'" onmouseout="this.style.background='#c9a84c'">
+          ↓ Download
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA / BOOK -->
+<section id="book">
+  <div class="section-inner">
+    <p class="section-label">Book</p>
+    <h2 class="section-title">Bring Paul to<br>your community</h2>
+    <p class="book-sub">Paul responds personally to every enquiry. Whether you're programming a Pesach concert, a shul fundraiser, or a JCC cultural evening — reach out and let's talk.</p>
+    <a href="mailto:bookings@tosh42.com" class="book-email">bookings@tosh42.com</a>
+    <div class="hero-ctas" style="justify-content:center;">
+      <a href="mailto:bookings@tosh42.com" class="btn-primary">Book a Show</a>
+      <a href="./paultosh.html" class="btn-outline">Full Site</a>
+    </div>
+    <p style="margin-top:1.5rem;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;color:rgba(245,240,232,0.3);">
+      Reference available: <a href="mailto:president@bsbisynagogue.org" style="color:rgba(201,168,76,0.5);text-decoration:none;">president@bsbisynagogue.org</a> · Stanley Baker, BSBI Synagogue SC
+      <br/><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.82rem;color:rgba(245,240,232,0.35);letter-spacing:0.02em;">"I like it how you tell the history of the songwriters. If they could have given you a review from last night they'd have given you all 10's."</span>
+    </p>
+    <a href="./paultosh.html" class="back-link">← Back to paultosh.com</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Paul Tosh &nbsp;·&nbsp; <a href="mailto:bookings@tosh42.com">bookings@tosh42.com</a> &nbsp;·&nbsp; <a href="./paultosh.html">paultosh.com</a> &nbsp;·&nbsp; <a href="./index.html">tosh42.com</a> (Paper Gun Operetta)
+</footer>
+
+</body>
+</html>
