@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Paul Tosh — Shows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--ink:#0d0b08;--cream:#f5f0e8;--gold:#b8973a;--gold-l:#d4b05a;--border:rgba(184,151,58,.2);}
+html,body{height:100%;}
+body{background:var(--ink);color:var(--cream);font-family:'Cormorant Garamond',Georgia,serif;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column;}
+
+.cta-btn{display:inline-block;background:var(--gold);color:var(--ink);font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:.5em 1.6em;flex-shrink:0;transition:background .2s;}
+.cta-btn:hover{background:var(--gold-l);}
+
+#top-info{background:rgba(13,11,8,.97);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:.75rem 2rem;flex-shrink:0;}
+#top-info p{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);opacity:.45;text-align:center;}
+.eyebrow{text-align:center;padding:2.5rem 2rem .5rem;flex-shrink:0;}
+.eyebrow .name{font-family:'Cinzel',serif;font-size:clamp(.75rem,1.5vw,1rem);letter-spacing:.5em;color:var(--gold);opacity:.8;text-transform:uppercase;}
+.eyebrow .tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.85rem,1.5vw,1.05rem);color:var(--cream);opacity:.35;margin-top:.4rem;letter-spacing:.1em;}
+
+.split{display:grid;grid-template-columns:1fr 1fr;flex:1;min-height:0;}
+
+.panel{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 2.5rem;text-decoration:none;color:var(--cream);overflow:hidden;min-height:60vh;}
+.panel::after{content:'';position:absolute;inset:0;background:rgba(13,11,8,.55);transition:background .4s;z-index:1;}
+.panel:hover::after{background:rgba(13,11,8,.35);}
+.panel-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s ease;z-index:0;}
+.panel:hover .panel-bg{transform:scale(1.03);}
+
+.panel-pg .panel-bg{background-image:radial-gradient(ellipse at 40% 60%,#2a1a08 0%,#0d0b08 70%),repeating-linear-gradient(135deg,rgba(184,151,58,.03) 0,rgba(184,151,58,.03) 1px,transparent 1px,transparent 50px);}
+.panel-sitp .panel-bg{background-image:radial-gradient(ellipse at 60% 40%,#1a1208 0%,#080604 70%),repeating-linear-gradient(45deg,rgba(184,151,58,.03) 0,rgba(184,151,58,.03) 1px,transparent 1px,transparent 50px);}
+.panel-sitp{padding-top:4rem;}
+.panel-pg{border-right:1px solid rgba(184,151,58,.15);}
+
+.panel-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:380px;}
+.panel-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:1.2rem;}
+.panel-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:300;line-height:.95;color:var(--cream);margin-bottom:.3em;}
+.panel-title em{font-style:italic;color:var(--gold-l);}
+.panel-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.9rem,1.5vw,1.1rem);color:var(--cream);opacity:.55;margin-bottom:1.8rem;line-height:1.5;max-width:300px;}
+.panel-desc{font-size:clamp(.8rem,1.2vw,.95rem);color:var(--cream);opacity:.6;line-height:1.7;margin-bottom:2rem;max-width:300px;font-weight:300;}
+.panel-btn{display:inline-block;border:1px solid var(--gold);color:var(--gold);font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;padding:.7em 2em;transition:background .2s,color .2s;}
+.panel-btn:hover,.panel-inner:hover .panel-btn{background:var(--gold);color:var(--ink);}
+
+.sitp-wrapper{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%;}
+.panel-inner-link{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:380px;text-decoration:none;color:inherit;}
+
+.backstage-link{display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:1.8rem;}
+.backstage-divider{width:40px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.35;margin:0 auto 1.2rem;}
+.backstage-label{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);opacity:.55;margin-bottom:.5rem;}
+.backstage-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.8vw,1.3rem);font-style:italic;color:var(--cream);opacity:.75;margin-bottom:.25rem;}
+.backstage-note{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.15em;color:var(--cream);opacity:.35;margin-bottom:.9rem;}
+.backstage-btn{display:inline-block;border:1px solid rgba(184,151,58,.3);color:var(--gold);opacity:.75;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;padding:.55em 1.5em;text-decoration:none;transition:border-color .2s,opacity .2s,background .2s;}
+.backstage-btn:hover{border-color:var(--gold);opacity:1;background:rgba(184,151,58,.08);}
+
+#bottom-cta{background:rgba(13,11,8,.97);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:center;gap:2rem;padding:.85rem 2rem;flex-shrink:0;flex-wrap:wrap;}
+#bottom-cta p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;color:var(--cream);opacity:.4;}
+
+@media(max-width:680px){
+  .split{grid-template-columns:1fr;}
+  .panel-pg{border-right:none;border-bottom:1px solid rgba(184,151,58,.15);}
+  .panel{min-height:50vh;padding:3rem 1.5rem;}
+  .panel-sitp{min-height:auto;padding-bottom:3rem;overflow:visible;}
+  .eyebrow{padding:1.5rem 1.5rem .3rem;}
+  #bottom-cta p{display:none;}
+  .backstage-link{margin-top:2rem;padding-bottom:1rem;}
+}
+</style>
+</head>
+<body>
+
+
+<div id="top-info">
+  <p>Two shows · One performer · Available across the US &amp; Canada</p>
+</div>
+
+<div class="eyebrow">
+  <p class="name">Paul Tosh</p>
+  <p class="tag">Pianist · Looping Artist · Songwriter</p>
+</div>
+
+<div class="split">
+
+  <div class="panel panel-pg">
+    <div class="panel-bg"></div>
+    <div class="panel-inner">
+      <p class="panel-label">Show I · Original Operetta</p>
+      <h2 class="panel-title">Paper<br/><em>Gun</em></h2>
+      <p class="panel-sub">This is mine, but you can have it.</p>
+      <p class="panel-desc">An original one-piano-man operetta in three acts of twenty minutes each. A reckoning about damage, clarity, and the quiet violence of the truth.</p>
+      <a href="./papergun.html" class="panel-btn">Enter →</a>
+    </div>
+  </div>
+
+  <div class="panel panel-sitp" style="cursor:default;">
+    <div class="panel-bg"></div>
+    <div class="sitp-wrapper">
+      <a href="./paultosh.html" class="panel-inner-link">
+        <p class="panel-label">Show II · Theatrical Concert</p>
+        <h2 class="panel-title">The Song<br/><em>Is The Play</em></h2>
+        <p class="panel-sub">Where iconic songs become living theatre.</p>
+        <p class="panel-desc">Billy Joel. The Beatles. Bob Dylan. Sinatra. Neil Diamond — each song acted out as a scene, then brought to life with live looping piano.</p>
+        <span class="panel-btn">Enter →</span>
+      </a>
+      <div class="backstage-link">
+        <div class="backstage-divider"></div>
+        <p class="backstage-label">Also available as</p>
+        <p class="backstage-title">Backstage With The Tribe</p>
+        <p class="backstage-note">(Jewish writers version)</p>
+        <a href="./backstage.html" class="backstage-btn">Explore →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="bottom-cta">
+  <p>To discuss availability, venue fit, or pricing — Paul responds personally to every enquiry.</p>
+  <a href="mailto:bookings@tosh42.com" class="cta-btn">◆ Book Now</a>
+</div>
+
+</body>
+</html>
