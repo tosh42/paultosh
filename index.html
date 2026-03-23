@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Paul Tosh</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:#0d0b08;
+  color:#f5f0e8;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  text-align:center;
+  padding:2rem;
+}
+.inner{display:flex;flex-direction:column;align-items:center;gap:1.8rem;max-width:480px;}
+h1{
+  font-size:clamp(3.5rem,12vw,6.5rem);
+  font-weight:300;
+  line-height:.9;
+  color:#f5f0e8;
+}
+h1 em{font-style:italic;color:#d4b05a;}
+.rule{
+  width:40px;height:1px;
+  background:linear-gradient(90deg,transparent,#b8973a,transparent);
+}
+p{
+  font-style:italic;
+  font-size:1.1rem;
+  color:#f5f0e8;
+  opacity:.55;
+  line-height:1.7;
+  letter-spacing:.03em;
+}
+a{
+  color:#b8973a;
+  text-decoration:none;
+  border-bottom:1px solid rgba(184,151,58,.3);
+  transition:color .2s,border-color .2s;
+}
+a:hover{color:#d4b05a;border-color:rgba(212,176,90,.6);}
+.contact{
+  font-family:'DM Mono',monospace;
+  font-size:.72rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#b8973a;
+  opacity:.6;
+  font-style:normal;
+}
+</style>
+</head>
+<body>
+<div class="inner">
+  <h1>Paul<br/><em>Tosh</em></h1>
+  <div class="rule"></div>
+  <p>New website coming soon.</p>
+  <p>For any information please email<br/>
+  <a href="mailto:bookings@paultosh.com" class="contact">bookings@paultosh.com</a></p>
+</div>
+</body>
+</html>
